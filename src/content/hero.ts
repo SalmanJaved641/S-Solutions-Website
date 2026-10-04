@@ -1,0 +1,2 @@
+export interface HeroContent { staticHeadline: string; rotatingWords: string[]; subtext: string; bookingLabel: string; projectLabel: string }
+export const heroContent: HeroContent = { staticHeadline: "We craft digital experiences that", rotatingWords: ["scale", "convert", "perform", "sell", "grow"], subtext: "S Solutions builds digital solutions that deliver performance — built for speed, conversions and long-term growth.", bookingLabel: "Book a 15 min call", projectLabel: "Start Your Project" };

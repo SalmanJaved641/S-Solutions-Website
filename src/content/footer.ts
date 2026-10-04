@@ -1,0 +1,1 @@
+export const footerContent = { tagline: "Websites, stores, apps and marketing that help businesses grow.", socialLabel: "Social Media", companyLabel: "Company", contactLabel: "Contact Us", copyrightLabel: "All rights reserved", poweredByLabel: "Powered By" };

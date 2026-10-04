@@ -1,0 +1,1 @@
+export const pricingContent = { eyebrow: "PRICING", heading: "Custom Projects", subtext: "Every business is different, so we don't work with fixed price packages. Tell us about your project and we'll put together a tailored plan and quote that fits your goals and budget.", factors: ["Project scope", "Features & complexity", "Timeline", "Ongoing needs"], buttonLabel: "Contact" };

@@ -1,0 +1,4 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { Container } from "@/components/ui/Container";
+export default function NotFound() { return <main id="main-content" className="grid min-h-screen place-items-center bg-bg pt-24 text-center"><Container><p className="font-mono text-sm tracking-[.25em] text-secondary-400">404</p><h1 className="mt-5 font-heading text-[clamp(3.5rem,10vw,8rem)] font-semibold leading-none tracking-[-.07em]">Page not found</h1><p className="mx-auto mt-6 max-w-lg text-muted">The page may have moved, or the link may be incorrect.</p><Link href="/" className="mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-primary-500 px-5 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400"><ArrowLeft size={16} />Back to home</Link></Container></main>; }

@@ -1,0 +1,2 @@
+export interface AboutContent { eyebrow: string; title: string; body: string; values: string[] }
+export const aboutContent: AboutContent = { eyebrow: "ABOUT", title: "A digital agency built for growth", body: "S Solutions is a digital agency based in Lahore, Pakistan, combining web development, Shopify e-commerce, app development and performance marketing to help businesses in Pakistan and worldwide launch, sell and scale online.", values: ["Performance-first", "Clean, scalable code", "Growth-minded"] };

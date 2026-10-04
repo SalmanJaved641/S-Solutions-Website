@@ -1,0 +1,19 @@
+"use client";
+import { useRef, useState } from "react";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
+import { processSteps } from "@/content/process";
+import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
+import { Tag } from "@/components/ui/Tag";
+
+export function Process() {
+  const section = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  const [active, setActive] = useState(0);
+  const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end end"] });
+  useMotionValueEvent(scrollYProgress, "change", (value) => setActive(Math.min(processSteps.length - 1, Math.floor(value * processSteps.length))));
+  if (reduced) return <section id="process" className="section-space"><Container><Tag>PROCESS</Tag><h2 className="mt-6 font-heading text-[clamp(2.8rem,7vw,6rem)] font-semibold tracking-[-.06em]">A collaborative approach</h2><div className="mt-12 grid gap-4">{processSteps.map((step) => <article key={step.number} className="rounded-3xl border border-white/10 bg-white/[.035] p-6"><span className="font-mono text-xs text-secondary-400">{step.number}</span><h3 className="mt-3 font-heading text-2xl font-semibold">{step.title}</h3><p className="mt-3 text-sm leading-7 text-muted">{step.description}</p></article>)}</div></Container></section>;
+  const step = processSteps[active];
+  return <section id="process" ref={section} className="relative h-[500svh] bg-bg"><div className="sticky top-0 flex h-svh items-center overflow-hidden"><Container className="text-center"><Tag>PROCESS</Tag><h2 className="mt-4 font-heading text-[clamp(2.4rem,6vw,5.5rem)] font-semibold tracking-[-.06em]">A collaborative approach</h2><div className="process-stage relative mx-auto mt-7 max-w-5xl"><div className="process-arc absolute inset-x-[5%] top-5 h-[clamp(13rem,32vw,23rem)] rounded-t-[50%] border-x border-t border-white/12 bg-gradient-to-b from-white/[.025] to-transparent" /><div className="absolute inset-x-[10%] top-0 flex justify-between">{processSteps.map((item, index) => { const distance = index - active; return <motion.div key={item.number} animate={{ x: `${distance * 105}%`, y: Math.abs(distance) * 36, scale: index === active ? 1 : .62, opacity: Math.abs(distance) > 2 ? 0 : 1 }} transition={{ type: "spring", stiffness: 170, damping: 23 }} className={`process-marker ${index === active ? "is-active" : ""}`}>{index === active && <span className="absolute -top-6 font-mono text-[.5rem] uppercase tracking-[.2em] text-white/45">Step</span>}{item.number}</motion.div>; })}</div><motion.div key={step.number} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .38 }} className="relative mx-auto flex min-h-[18rem] max-w-2xl flex-col items-center justify-center px-5 pt-12"><h3 className="font-heading text-[clamp(2rem,5vw,4rem)] font-semibold tracking-[-.05em]">{step.title}</h3><p className="mt-4 max-w-xl text-sm leading-7 text-muted sm:text-base">{step.description}</p><div className="mt-5 flex flex-wrap justify-center gap-2">{step.tags.map((tag) => <span key={tag} className="font-mono text-[.55rem] uppercase tracking-[.13em] text-white/55">{tag}</span>)}</div></motion.div></div><div className="mx-auto mt-4 max-w-sm"><div className="flex justify-between font-mono text-[.6rem] tracking-[.15em] text-white/45"><span>{step.number} / 05</span><span>SCROLL TO EXPLORE</span></div><div className="mt-2 h-px overflow-hidden bg-white/10"><motion.div className="h-full bg-gradient-to-r from-primary-500 to-secondary-500" style={{ scaleX: scrollYProgress, transformOrigin: "left" }} /></div></div><Button href="/contact" variant="secondary" className="mt-6" icon={<ArrowUpRight size={16} />}>Start your project</Button></Container></div></section>;
+}
