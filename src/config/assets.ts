@@ -9,9 +9,9 @@ export interface AssetManifest {
 
 // Replace a null with a public file path when the owner supplies that asset.
 export const assets: AssetManifest = {
-  logoIcon: null,
-  logoFull: null,
-  favicon: null,
+  logoIcon: "/SS Logo.png",
+  logoFull: "/SS Logo.png",
+  favicon: "/S Solution Logo rounded.png",
   marqueeLogos: {},
   projectImages: {},
   serviceImages: {},

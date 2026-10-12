@@ -13,7 +13,7 @@ export function WhatYouGet() {
   const [active, setActive] = useState(0);
   const toggle = (index: number) => setActive((current) => current === index ? 0 : index);
   return <section id="services" className="section-space bg-bg"><Container>
-    <SectionHeading eyebrow="SERVICES" title="WHAT YOU GET" sideText="A focused set of design, development and growth services, delivered to a brief, a timeline and a price — built for speed, consistency and lasting quality." />
+    <SectionHeading eyebrow="SERVICES" title="WHAT YOU GET" />
     <div className="mt-14 flex flex-col gap-2 lg:h-[38rem] lg:flex-row" onMouseLeave={() => setActive(0)}>
       {services.map((service, index) => {
         const open = active === index;
