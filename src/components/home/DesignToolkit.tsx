@@ -1,5 +1,65 @@
-import { toolkitRows } from "@/content/toolkit";
+import Image from "next/image";
+import { toolkitRows, type ToolItem } from "@/content/toolkit";
 import { Container } from "@/components/ui/Container";
 
-function ToolCell({ name, category }: { name: string; category: string }) { return <span className="flex shrink-0 items-center gap-3 border-r border-white/8 px-6 py-5"><span className="grid size-10 place-items-center rounded-xl bg-white/5 font-heading text-xs font-bold text-primary-400">{name.slice(0, 2).toUpperCase()}</span><span className="whitespace-nowrap font-heading text-sm font-semibold">{name}</span><span className="text-white/20">•</span><span className="whitespace-nowrap text-xs text-white/40">{category}</span></span>; }
-export function DesignToolkit() { return <section id="toolkit" className="section-space bg-bg"><Container><h2 className="font-serif text-[clamp(3.2rem,7vw,6.5rem)] leading-none">Design Toolkit</h2><div className="mt-14 overflow-hidden rounded-3xl border border-white/8">{toolkitRows.map((row, rowIndex) => { const items = [...row, ...row, ...row]; return <div key={rowIndex} className="toolkit-mask overflow-hidden border-b border-white/8 last:border-b-0"><div className={`toolkit-track flex w-max ${rowIndex % 2 ? "is-reverse" : ""}`} style={{ animationDuration: `${58 + rowIndex * 7}s` }}><div className="flex">{items.map((item, index) => <ToolCell key={`a-${item.name}-${index}`} {...item} />)}</div><div className="flex" aria-hidden="true">{items.map((item, index) => <ToolCell key={`b-${item.name}-${index}`} {...item} />)}</div></div></div>; })}</div></Container></section>; }
+function ToolCell({ name, category, logo }: ToolItem) {
+  return (
+    <span className="flex shrink-0 items-center gap-3 border-r border-white/8 px-6 py-5">
+      <span className="relative block size-10 shrink-0 overflow-hidden rounded-[15px]">
+        {logo ? (
+          <Image
+            src={logo}
+            alt={`${name} logo`}
+            width={40}
+            height={40}
+            className="block size-full aspect-square rounded-[15px] object-contain"
+          />
+        ) : (
+          <span className="grid size-full place-items-center rounded-[15px] bg-white/5 font-heading text-xs font-bold text-primary-400">
+            {name.slice(0, 2).toUpperCase()}
+          </span>
+        )}
+      </span>
+      <span className="whitespace-nowrap font-heading text-sm font-semibold">{name}</span>
+      <span className="text-white/20">•</span>
+      <span className="whitespace-nowrap text-xs text-white/40">{category}</span>
+    </span>
+  );
+}
+
+export function DesignToolkit() {
+  return (
+    <section id="toolkit" className="section-space bg-bg">
+      <Container>
+        <h2 className="font-serif text-[clamp(3.2rem,7vw,6.5rem)] leading-none">Design Toolkit</h2>
+        <div className="mt-14 overflow-hidden rounded-3xl border border-white/8">
+          {toolkitRows.map((row, rowIndex) => {
+            const items = [...row, ...row, ...row];
+            return (
+              <div
+                key={rowIndex}
+                className="toolkit-mask overflow-hidden border-b border-white/8 last:border-b-0"
+              >
+                <div
+                  className={`toolkit-track flex w-max ${rowIndex % 2 ? "is-reverse" : ""}`}
+                  style={{ animationDuration: `${58 + rowIndex * 7}s` }}
+                >
+                  <div className="flex">
+                    {items.map((item, index) => (
+                      <ToolCell key={`a-${item.name}-${index}`} {...item} />
+                    ))}
+                  </div>
+                  <div className="flex" aria-hidden="true">
+                    {items.map((item, index) => (
+                      <ToolCell key={`b-${item.name}-${index}`} {...item} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Container>
+    </section>
+  );
+}
